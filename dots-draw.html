@@ -1,0 +1,430 @@
+<!-- Saved from: http://pastebin.com/raw.php?i=Zd5rdWMx -->
+<!-- To use: Save as .html file. Open with browser. -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtmlxml:lang="en" lang="en" dir="ltr">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>[s4s] doo-del 0.6</title>
+<style type="text/css">
+html, body {margin:0;padding:0;width:100%;height:100%;}
+#box {border:10px solid black;width:0em;height:0em;font-size:100%;position:relative;-moz-user-select:-moz-none;-khtml-user-select:none;-webkit-user-select:none;cursor:default;}
+.pixel {display:block;position:absolute;width:1em;height:1em;}
+.even {background-color:#ffffff;}
+.odd {background-color:#dddddd;}
+.fill {background-color:#111111;}
+.odd.fill {background-color:#000000;}
+#out {width:40em;height:40em;font-size:100%;}
+.spam {color:red;font-weight:bold;font-size:110%;}
+.brush + label {color:#888888}
+.brush:checked, .brush:checked + label {color:#0000ff}
+</style>
+<script type="text/javascript">
+window.ondragstart = function() {return false;}
+var mouseState = 0;
+var brush = 0;
+var textX = 36;
+var textY = 18;
+var boxX = textX * 2;
+var boxY = textY * 4;
+var scrW, scrH;
+
+function makeBox() {
+  screenResize();
+  var box = document.getElementById('box');
+  while(box.firstChild) box.removeChild(box.firstChild)
+  box.style.width = boxX + 'em';
+  box.style.height = boxY + 'em';
+  for(var y=0;y<boxY;y++) {
+    for(var x=0;x<boxX;x++) {
+      var div = document.createElement('div');
+      div.id = 'pixel-' + x + '-' + y;
+      div.className = ((x + y) % 2 == 0) ? 'pixel even' : 'pixel odd';
+      div.style.left = x + 'em';
+      div.style.top = y + 'em';
+      box.appendChild(div);
+    }
+  }
+  brushy();
+  //document.getElementById('out').value = '';
+  document.getElementById('gridX').value = boxX;
+  document.getElementById('gridY').value = boxY;
+}
+
+function resize() {
+  var conf = confirm('Resize the box?\n\n>this kills the drawing');
+  if(!conf) return
+  var xb = document.getElementById('gridX');
+  var yb = document.getElementById('gridY');
+  var x = parseInt(xb.value,10);
+  var y = parseInt(yb.value,10);
+  if(x < 4 || x > 192) x = 72
+  if(y < 4 || y > 192) y = 72
+  textX = Math.floor(x/2); boxX = textX * 2;
+  textY = Math.floor(y/4); boxY = textY * 4;
+  makeBox();
+}
+
+function trash() {
+  var conf = confirm('Into the trash it goes?\n\n>this kills the drawing');
+  if(!conf) return
+  makeBox();
+}
+
+function fillMeMaybe(obj) {
+  var tx = parseInt(obj.id.split('-')[1],10);
+  var ty = parseInt(obj.id.split('-')[2],10);
+  var z = 0;
+
+  switch(brush) {
+    case 0:
+      fillPixel(obj,mouseState);
+    break;
+    case 1:
+    case 2:
+      for(var x=(tx-brush);x<(tx+1+brush);x++) {
+        for(var y=(ty-brush);y<(ty+1+brush);y++) {
+          if(z > 10) return;
+          var newt = document.getElementById('pixel-' + x + '-' + y);
+          if(newt) fillPixel(newt,mouseState)
+        }
+      }
+    break;
+    case 3:
+      for(var x=(tx-3);x<(tx+4);x++) {
+        for(var y=(ty-3);y<(ty+4);y++) {
+          if(z > 10) return;
+          var newt = document.getElementById('pixel-' + x + '-' + y);
+          if(newt && Math.abs(x-tx) + Math.abs(y-ty) < 5) fillPixel(newt,mouseState)
+        }
+      }
+    break;
+    case 4:
+      for(var x=(tx-2);x<(tx+3);x++) {
+        for(var y=(ty-2);y<(ty+3);y++) {
+          if(z > 10) return;
+          var newt = document.getElementById('pixel-' + x + '-' + y);
+          if(mouseState == 1) {
+            if(newt) fillPixel(newt,mouseState - ((x + y) % 2));
+          } else {
+            if(newt) fillPixel(newt,2);
+          }
+        }
+      }
+    break;
+  }
+}
+
+function fillPixel(obj,fill) {
+  obj = (typeof obj == 'object') ? obj : document.getElementById('pixel-' + obj);
+  if(fill == 1) {
+    obj.className += (obj.className.indexOf(' fill') == -1) ? ' fill' : '';
+  } else if(fill == 2) {
+    obj.className = obj.className.replace(/ fill/g,'');
+  }
+}
+
+function brushy() {
+  var brad = document.getElementsByName('brush');
+  for(var i=0;i<brad.length;i++) if(brad[i].checked) brush = parseInt(brad[i].value,10)
+}
+
+function output() {
+  var grid = [];
+  for(var y=0;y<boxY;y++) {
+    grid[y] = [];
+    for(var x=0;x<boxX;x++) {
+      grid[y][x] = (document.getElementById('pixel-' + x + '-' + y).className.indexOf(' fill') == -1) ? 0 : 1;
+    }
+  }
+  var txt = '';
+  for(var y=0;y<(textY);y++) {
+    var line = '';
+    for(var x=0;x<(textX);x++) {
+      var bit = [0,0,0,0,0,0,0,0];
+      if(grid[y*4+0][x*2+0] == 1) bit[0] = 1;
+      if(grid[y*4+1][x*2+0] == 1) bit[1] = 1;
+      if(grid[y*4+2][x*2+0] == 1) bit[2] = 1;
+      if(grid[y*4+0][x*2+1] == 1) bit[3] = 1;
+      if(grid[y*4+1][x*2+1] == 1) bit[4] = 1;
+      if(grid[y*4+2][x*2+1] == 1) bit[5] = 1;
+      if(grid[y*4+3][x*2+0] == 1) bit[6] = 1;
+      if(grid[y*4+3][x*2+1] == 1) bit[7] = 1;
+      var num = 10240 + (bit[0] + bit[1]*2 + bit[2]*4 + bit[3]*8 + bit[4]*16 + bit[5]*32 + bit[6]*64 + bit[7]*128);
+      line += String.fromCharCode(num);
+    }
+    if(document.getElementById('killtrail').checked) {
+      line = line.replace(/\u2800*$/,'');
+    }
+    txt += line + '\n';
+  }
+  document.getElementById('out').value = txt;
+  document.getElementById('bytes').innerHTML = 'Bytes: ' + (encodeURIComponent(txt).split(/%..|./).length - 1) + '/2000 [' + numchars(txt) + ']';
+  var spam = txt.split('\n').sort().join('\n').match(/(?:^|\n)([^\n]+)(?:\n\1){4,}/g);
+  if(spam != null) bytes.innerHTML = '<span class="spam" title="There are 4 or more identical lines.\nThis output may trigger a spam filter on 4chan.">SPAM</span> ' + bytes.innerHTML
+}
+
+function load(smart) {
+  var conf = confirm('Attempt to load a drawing from the\ncrap currently in the output box?');
+  if(!conf) return
+  var line = document.getElementById('out').value.replace(/[^\u2800-\u28FF\n]/g,'').replace(/\n+/g,'\n').split('\n');
+  var tX = 0;
+  for(var i=0;i<line.length;i++) if(line[i].length > tX) tX = line[i].length
+  var tY = line.length;
+  if(tX == 0 || tY == 0) return
+  if(line[tY-1] == '') tY--
+
+  if(smart) {
+    textX = (tX > 96) ? 96 : tX;
+    boxX = textX * 2;
+    textY = (tY > 48) ? 48 : tY;
+    boxY = textY * 4;
+  }
+  makeBox();
+
+  while(line.length < textY) line[line.length] = ''
+  for(var i=0;i<line.length;i++) while(line[i].length < textX) line[i] += '\u2800'
+  for(var y=0;y<(textY);y++) {
+    for(var x=0;x<(textX);x++) {
+      var num = line[y].charCodeAt(x)-10240;
+      var bin = num.toString(2);
+      while(bin.length < 8) bin = '0' + bin;
+      bin = bin.split('').reverse().join('');
+      fillPixel((x*2+0) + '-' + (y*4+0),bin[0]);
+      fillPixel((x*2+0) + '-' + (y*4+1),bin[1]);
+      fillPixel((x*2+0) + '-' + (y*4+2),bin[2]);
+      fillPixel((x*2+0) + '-' + (y*4+3),bin[6]);
+      fillPixel((x*2+1) + '-' + (y*4+0),bin[3]);
+      fillPixel((x*2+1) + '-' + (y*4+1),bin[4]);
+      fillPixel((x*2+1) + '-' + (y*4+2),bin[5]);
+      fillPixel((x*2+1) + '-' + (y*4+3),bin[7]);
+    }
+  }
+}
+
+function loadblock(smart) {
+  var conf = confirm('Attempt to load and convert a\nblock drawing made with \u2588\u2580\u2584\u2591?\n\nNote that \u2592\u258C\u2590 may turn out funky.');
+  if(!conf) return 
+  var line = document.getElementById('out').value.replace(/[^\u2580\u2584\u2588\u258C\u2590\u2591\u2592\u2593\n]/g,'').replace(/\n+/g,'\n').split('\n');
+  var tX = 0;
+  for(var i=0;i<line.length;i++) if(line[i].length > tX) tX = line[i].length
+  var tY = line.length;
+  if(tX == 0 || tY == 0) return
+  if(line[tY-1] == '') tY--
+  tX = Math.ceil(tX/2);
+  tY = Math.ceil(tY/2);
+
+  if(smart) {
+    textX = (tX > 96) ? 96 : tX;
+    boxX = textX * 2;
+    textY = (tY > 48) ? 48 : tY;
+    boxY = textY * 4;
+  }
+  makeBox();
+
+  while(line.length < textY) line[line.length] = ''
+  for(var i=0;i<line.length;i++) while(line[i].length < textX) line[i] += '\u2591'
+  for(var y=0;y<(textY*2);y++) {
+    for(var x=0;x<(textX*2);x++) {
+      if(!line[y]) continue
+      var pix1 = ('\u2580\u2588\u258C\u2590\u2593'.indexOf(line[y][x]) != -1) ? 1 : 2;
+      var pix2 = ('\u2584\u2588\u258C\u2590\u2593'.indexOf(line[y][x]) != -1) ? 1 : 2;
+      fillPixel((x) + '-' + (y*2+0),pix1);
+      fillPixel((x) + '-' + (y*2+1),pix2);
+    }
+  }
+}
+
+function flip(type) {
+  var grid = [];
+  for(var y=0;y<boxY;y++) {
+    grid[y] = [];
+    for(var x=0;x<boxX;x++) {
+      grid[y][x] = (document.getElementById('pixel-' + x + '-' + y).className.indexOf(' fill') == -1) ? 0 : 1;
+    }
+  }
+
+  if(type == 2) {
+    var x = boxY;var y = boxX;
+    if(x < 4 || x > 192) x = 72
+    if(y < 4 || y > 192) y = 72
+    textX = Math.floor(x/2); boxX = textX * 2;
+    textY = Math.ceil(y/4); boxY = textY * 4;
+    makeBox();
+  }
+
+  for(var y=0;y<boxY;y++) {
+    for(var x=0;x<boxX;x++) {
+      var fill = 0;
+      switch(type) {
+        case 0: fill = grid[y][boxX - x - 1] || 2; //mirror h
+        break;
+        case 1: fill = grid[boxY - y - 1][x] || 2; //mirror v
+        break;
+        case 2: fill = grid[boxX - x - 1][y] || 2; //rotate 90
+        break;
+        case 3: fill = grid[y][x] + 1 || 1; //invert
+        break;
+      }
+      fillPixel(document.getElementById('pixel-' + x + '-' + y),fill);
+    }
+  }
+  output();
+}
+
+function numchars(txt) {
+  var count = 0;
+  for(var i=0;i<txt.length;i++) {
+    var num = txt.charCodeAt(i);
+    if(num >= 55296 && num <= 56319) i++
+    count++;
+  }
+  return count;
+}
+
+// Event handlers
+
+function keyDown(e) {
+  if(!document.getElementById('hotkeys').checked) return
+  var e = window.event || e;
+  if(!e) return
+  var key = e.charCode || e.keyCode;
+  if(!key) return;
+  switch(key) {
+    case 17: 
+      mouseState = 1;
+      return false;
+    case 16: 
+      mouseState = 2;
+      return false;
+    case 49: case 50: case 51: case 52: case 53:
+      document.getElementById('brush-' + (key-49)).checked = 'checked';
+      brushy();
+      return false;
+    break;
+  }
+}
+
+function keyUp(e) {
+  mouseState = 0;
+}
+
+function mouseyMove(e) {
+  if(mouseState == 0) return
+  var e = window.event || e;
+  if(!e) return
+  var target = e.target || e.srcElement;
+  if(!target) return
+  if(target.id.indexOf('pixel-') != 0) return
+  fillMeMaybe(target);
+}
+
+function mouseyDown(e) {
+  var e = window.event || e;
+  if(!e) return
+  var target = e.target || e.srcElement;
+  if(!target) return
+  if(target.id.indexOf('pixel-') != 0) return
+  mouseState = (target.className.indexOf(' fill') == -1) ? 1 : 2;
+  fillMeMaybe(target);
+}
+
+function mouseyUp(e) {
+  mouseState = 0;
+
+  var e = window.event || e;
+  if(!e) return
+  var target = e.target || e.srcElement;
+  if(!target) return
+  if(target.id.indexOf('pixel-') != 0) return
+  output();
+}
+
+function screenResize() {
+  var docElement = (document.compatMode=='CSS1Compat') ? document.documentElement : document.body;
+  scrW = docElement.clientWidth;
+  scrH = docElement.clientHeight;
+  var box = document.getElementById('box');
+  if(scrW/boxX < scrH/boxY) {
+    var size = Math.floor(scrW / (boxX/5));
+  } else {
+    var size = Math.floor(scrH / (boxY/5));
+  }
+  box.style.fontSize = size + '%';
+}
+
+</script>
+</head>
+<body onmouseup="mouseyUp(event)" onkeydown="keyDown(event)" onkeyup="keyUp(event)" onresize="screenResize()">
+<div id="box" onmouseover="mouseyMove(event)" onmousedown="mouseyDown(event)"></div>
+<div id="tools">
+<input type="button" onclick="output()" value="make"/>
+<input type="button" onclick="trash()" value="clear"/>
+<input type="button" onclick="load()" value="load" title="Load picture from textbox."/>
+<input type="button" onclick="load(true)" value="load &#10529;" title="Load picture from textbox. Autoresize to fit image."/>
+<input type="button" onclick="loadblock()" value="load &#9608;" title="Load blocky picture."/>
+<input type="button" onclick="loadblock(true)" value="load &#9608; &#10529;" title="Load blocky picture. Autoresize to fit image."/>
+&#9474;
+<span title="Select brush.">
+<input class="brush" type="radio" name="brush" id="brush-0" value="0" onclick="brushy()" checked="checked"/><label for="brush-0">&#9642;/&#9643;</label>
+<input class="brush" type="radio" name="brush" id="brush-1" value="1" onclick="brushy()"/><label for="brush-1">&#9632;/&#9633;</label>
+<input class="brush" type="radio" name="brush" id="brush-2" value="2" onclick="brushy()"/><label for="brush-2">&#11035;/&#11036;</label>
+<input class="brush" type="radio" name="brush" id="brush-3" value="3" onclick="brushy()"/><label for="brush-3">&#11044;/&#11093;</label>
+<input class="brush" type="radio" name="brush" id="brush-4" value="4" onclick="brushy()"/><label for="brush-4">&#9618;/&#11036;</label>
+<!-- &#8226;/&#9900; &#9899;/&#9898;  &#11044;/&#11093; -->
+</span>
+&#9474;
+Transform:
+<input type="button" value="&#8596;" onclick="flip(0)" title="flip horizontal"/>
+<input type="button" value="&#8597;" onclick="flip(1)" title="flip verical"/>
+<input type="button" value="&#10227;" onclick="flip(2)" title="rotate (preserve drawing)"/>
+<input type="button" value="&#9688;" onclick="flip(3)" title="invert color"/>
+&#9474;
+Grid: 
+<span title="Values are rounded to nearest x/2 and y/4. 72x72 is optimal for filling a 4chan comment.">
+<input type="text" maxlength="3" id="gridX" value="72" style="width:3em;"/>&#215;<input type="text" maxlength="3" id="gridY" value="72" style="width:3em;"/>
+<input type="button" onclick="resize()" value="resize"/>
+</span>
+&#9474;
+<span title="Removes trailing spaces to save characters.\nMay make a mess of a drawing with vertical whitespace.">
+<input type="checkbox" id="killtrail" checked="checked" onclick="output()"/><label for="killtrail">Remove trails</label>
+</span>
+<span title="Hotkeys for drawing. Ctrl = always draw; Shift: always delete; 0-5: select brush.">
+<input type="checkbox" id="hotkeys"/><label for="hotkeys">Hotkeys</label>
+</span>
+&#9474;
+<span id="bytes" title="Approximately how many characters this will take up in a 4chan comment.">Bytes: </span>
+</div>
+<textarea id="out"></textarea>
+
+<script type="text/javascript">makeBox();</script></body></html>
+<!-- a1b37a531ca2bba3339d454430563750
+0.1	http://pastebin.com/raw.php?i=CvPfi0r5
+0.3b	http://pastebin.com/raw.php?i=ckJkPVEK
+0.4b	http://pastebin.com/raw.php?i=d0LJzYdt
+0.5e	http://pastebin.com/raw.php?i=R3CGF5WG
+0.6	http://pastebin.com/raw.php?i=Zd5rdWMx
+
+Keys:
+* Mouse click: Starts drawing. If over white pixel, draws black. If over black pixel, draws white.
+* Ctrl: Hold down for always black (no mouse button needed).
+* Shift: Hold down for always white (no mouse button needed).
+* 1-5: Select this brush.
+
+Done:
+* Auto-render after mouse up
+* Let user load a block of braille as an image
+* Let user specify custom dimensions
+* Auto-resize grid based on browser window size
+* Auto-cull trailing spaces and blank lines
+* Byte count
+* Spam filter warning
+* More brushes
+* Hilight brush in use
+* Bigger dimensions allowed
+* Flip/invert
+* Smart Load will resize, Load will not
+* Convert blocks to dots
+
+Todo:
+
+No restriction. WTFPL.
+-->

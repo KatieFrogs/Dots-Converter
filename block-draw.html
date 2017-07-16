@@ -1,0 +1,449 @@
+<!-- Saved from: http://pastebin.com/raw.php?i=hvdci7nX -->
+<!-- To use: Save as .html file. Open with browser. -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtmlxml:lang="en" lang="en" dir="ltr">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>[s4s] block drawing 0.3a</title>
+<style type="text/css">
+#wrapper {position:relative;overflow:hidden;margin:5px;}
+#img {position:absolute;margin:8px 4px;resize:both;}
+#box {width:33em;height:30em;font-size:175%;opacity:.2;}
+#box:hover {opacity:.6 !important}
+#left, #top {width:3em;}
+#width, #height {width:4em;}
+.spam {color:#990000;font-weight:bold;font-size:90%;}
+*{font-family:monospace!important}
+</style>
+<script type="text/javascript">
+var palette = '██▀▄▌▐░▒▒▒' //0 1 2 3 4 5 7 8 9
+
+function fliph() {
+  var box = document.getElementById('box');
+  var line = box.value.split('\n');
+  var longest = 0;
+  for(var i=0;i<line.length;i++) if(line[i].length > longest) longest = line[i].length
+  for(var i=0;i<line.length;i++) {
+    while(line[i].length < longest) line[i] += '░'
+    line[i] = line[i].split('').reverse().join('');
+    line[i] = line[i].replace(/▌/g,'❖').replace(/▐/g,'▌').replace(/❖/g,'▐');
+  }
+  box.value = line.join('\n');
+  byte();
+}
+
+function flipv() {
+  var box = document.getElementById('box');
+  var line = box.value.split('\n');
+  line = line.reverse();
+  for(var i=0;i<line.length;i++) {
+    line[i] = line[i].replace(/▄/g,'❖').replace(/▀/g,'▄').replace(/❖/g,'▀');
+  }
+  box.value = line.join('\n');
+  byte();
+}
+
+function flipr() {
+  var box = document.getElementById('box');
+  var line = box.value.split('\n');
+  var rine = [];
+  var longest = 0;
+  for(var i=0;i<line.length;i++) if(line[i].length > longest) longest = line[i].length
+  for(var i=0;i<line.length;i++) while(line[i].length < longest) line[i] += '░'
+  for(var i=0;i<longest;i++) {
+    rine[i] = '';
+    for(var k=0;k<line.length;k++) rine[i] += line[line.length-k-1][i]
+    rine[i] = rine[i].replace(/▀/g,'❰u❱').replace(/▐/g,'❰r❱').replace(/▄/g,'❰d❱').replace(/▌/g,'❰l❱');
+    rine[i] = rine[i].replace(/❰u❱/g,'▐').replace(/❰r❱/g,'▄').replace(/❰d❱/g,'▌').replace(/❰l❱/g,'▀');
+  }
+  box.value = rine.join('\n');
+  byte();
+}
+
+function fliprsq() {
+  //var conf = confirm('This preserves the 2x1 textual aspect ratio.\nOkay, you seriously do not want to use this.\nI mean it. It will fuck everything up.\nIt only works intelligently with: █░▄▀\nIf you used any other blocks, it will look like shit.\n\nTry anyway?');
+  var conf = confirm('This will attempt a preserve-aspect rotation.\nIt is lossy, as it has to convert ▒→░ and ▌/▐→█\n\nProceed?');
+  if(!conf) return
+  var box = document.getElementById('box');
+  var line = box.value.split('\n');
+  var rine = [];
+  var longest = 0;
+  for(var i=0;i<line.length;i++) if(line[i].length > longest) longest = line[i].length
+  longest += longest % 2
+  for(var i=0;i<line.length;i++) while(line[i].length < longest) line[i] += '░'
+  for(var i=0;i<longest;i=i+2) {
+    rine[i/2] = '';
+    for(var k=0;k<line.length;k=k+1) {
+      var bit = line[line.length-k-1].substr(i,2);
+      switch(bit.replace(/▒/g,'░').replace(/(▌|▐)/g,'█')) {
+        case '██': bit = '██'; break;
+        case '░░': bit = '░░'; break;
+        case '█░': bit = '▀▀'; break;
+        case '▀▀': bit = '░█'; break;
+        case '░█': bit = '▄▄'; break;
+        case '▄▄': bit = '█░'; break;
+        case '▄▀': bit = '▀▄'; break;
+        case '▀▄': bit = '▄▀'; break;
+        case '░▀': bit = '░▄'; break;
+        case '░▄': bit = '▄░'; break;
+        case '▄░': bit = '▀░'; break;
+        case '▀░': bit = '░▀'; break;
+        case '▄█': bit = '█▄'; break;
+        case '█▄': bit = '█▀'; break;
+        case '█▀': bit = '▀█'; break;
+        case '▀█': bit = '▄█'; break;
+      }
+      rine[i/2] += bit;
+    }
+  }
+  box.value = rine.join('\n');
+  byte();
+}
+
+function flipc() {
+  var box = document.getElementById('box');
+  var line = box.value.split('\n');
+  var longest = 0;
+  for(var i=0;i<line.length;i++) if(line[i].length > longest) longest = line[i].length
+  for(var i=0;i<line.length;i++) {
+    //while(line[i].length < longest) line[i] += '░'
+    line[i] = line[i].replace(/▄/g,'❖').replace(/▀/g,'▄').replace(/❖/g,'▀');
+    line[i] = line[i].replace(/▌/g,'❖').replace(/▐/g,'▌').replace(/❖/g,'▐');
+    line[i] = line[i].replace(/█/g,'❖').replace(/░/g,'█').replace(/❖/g,'░');
+  }
+  box.value = line.join('\n');
+  byte();
+}
+
+function fill(num) {
+  var chr = palette[num];
+  var box = document.getElementById('box');
+  var txt = box.value;
+  //if(!box.selectionEnd) return
+  var cursor = box.selectionEnd;
+  if(box.selectionStart != box.selectionEnd) {
+    var sel = txt.substring(box.selectionStart,box.selectionEnd);
+    if(sel.indexOf('\n') != -1) {
+      var conf = confirm('will affect multiple lines\nya sure?');
+      if(!conf) return
+    }
+    box.value = txt.substring(0,box.selectionStart) + sel.replace(/[^\n]/g,chr) + txt.substring(box.selectionEnd,txt.length);
+    box.selectionStart = cursor;
+    box.selectionEnd = cursor;
+  } else {
+    if(txt.substr(box.selectionEnd,1) == '\n') chr += '\n'
+    box.value = txt.substring(0,box.selectionEnd) + chr + txt.substring(box.selectionEnd + 1,txt.length);
+    var adv = (document.getElementById('cursor').checked) ? 1 : 0;
+    box.selectionStart = cursor + adv;
+    box.selectionEnd = cursor + adv;
+  }
+  byte();
+}
+
+function replace(type) {
+  var box = document.getElementById('box');
+  var line = [];
+  if(box.selectionStart != box.selectionEnd) {
+    line = box.value.substring(box.selectionStart,box.selectionEnd).split('\n');
+  } else {
+    line = box.value.split('\n');
+  }
+  if(line.length > 1) {
+    var conf = confirm('will affect multiple lines\nya sure?');
+    if(!conf) return
+  }
+  for(var i=0;i<line.length;i++) {
+    switch(type) {
+      case 'l_':
+        line[i] = line[i].replace(/░*$/g,'');
+      break;
+      case 'ml': 
+        line[i] = line[i].replace(/▒/g,'░');
+      break;
+      case '^ml':
+        line[i] = line[i].replace(/^▒/,'❖');
+        for(var j=0;j<line[i].length;j++) line[i] = line[i].replace(/❖▒/g,'❖❖')
+        line[i] = line[i].replace(/❖/g,'░');
+      break;
+      case '$ml':
+        line[i] = line[i].replace(/▒$/,'❖');
+        for(var j=0;j<line[i].length;j++) line[i] = line[i].replace(/▒❖/g,'❖❖')
+        line[i] = line[i].replace(/❖/g,'░');
+      break;
+      case 'lm': 
+        line[i] = line[i].replace(/░/g,'▒');
+      break;
+    }
+  }
+  if(box.selectionStart != box.selectionEnd) {
+    box.value = box.value.substring(0,box.selectionStart) + line.join('\n') + box.value.substring(box.selectionEnd,box.value.length);
+  } else {
+    box.value = line.join('\n');
+  }
+  byte();
+}
+
+function pad(txt,n,fill) {
+  txt = txt.toString();
+  var fill = fill || ' ';
+  while(txt.length < n) txt += fill;
+  return txt;
+}
+
+function numchars(txt) {
+  var count = 0;
+  for(var i=0;i<txt.length;i++) {
+    var num = txt.charCodeAt(i);
+    if(num >= 55296 && num <= 56319) i++
+    count++;
+  }
+  return count;
+}
+
+function maketext() {
+  var box = document.getElementById('box');
+  var img = document.getElementById('img');
+  var x = Math.round((px(img.style.width) + px(img.style.left))/13)+1;
+  var y = Math.round((px(img.style.height) + px(img.style.top))/25)+1;
+  if(x < 1 || x > 100 || y < 1 || y > 100) return
+  var dim = prompt('THIS KILLS THE PROGRESS\n\nErase and fill text box to cover image?\nTextual dimensions: ' + x + ' by ' + y + ' (' + ((x*y*3)+y) + ' bytes).',x + '×' + y);
+  if(!dim || dim == '') return
+  dim = dim.replace(/^\D*/,'').replace(/\D*$/,'').split(/\D+/);
+  if(dim.length < 2) return
+  var x = parseInt(dim[0]);
+  var y = parseInt(dim[1]);
+  if(x < 1 || x > 100 || y < 1 || y > 100) return
+  var txt = '';
+  for(var i=0;i<y;i++) {
+    txt += pad('',x,'▒░') + '\n';
+  }
+  box.value = txt;
+  byte();
+}
+
+function byte() {
+  var box = document.getElementById('box');
+  var byte = document.getElementById('byte');
+  var txt = box.value;
+  byte.innerHTML = 'bytes: ' + (encodeURIComponent(txt).split(/%..|./).length - 1) + '/2000';
+  if(box.selectionEnd && box.selectionStart != box.selectionEnd) {
+    byte.innerHTML += ' [sel chars: ' + numchars(txt.substring(box.selectionStart,box.selectionEnd)) + ']';
+  }
+  var spam = txt.split('\n').sort().join('\n').match(/(?:^|\n)([^\n]+)(?:\n\1){4,}/g);
+  if(spam != null) byte.innerHTML += ' <span class="spam" title="There are 4 or more identical lines.\nThis output may trigger a spam filter on 4chan.">[spam]</span>'
+}
+
+function keyDown(e) {
+  if(!document.getElementById('hotkeys').checked) return
+  var e = window.event || e;
+  if(!e) return
+  var key = e.charCode || e.keyCode;
+  if(!key) return;
+  switch(key) {
+    case 48: case 49: case 50: case 51: case 52: case 53: case 54: case 55: case 56: case 57:
+      fill(key - 48);
+      e.preventDefault();
+      return false;
+    break;
+  }
+}
+
+function inc(e) {
+  var e = window.event || e;
+  if(!e) return
+  var key = e.charCode || e.keyCode;
+  if(!key) return;
+  var target = e.target || e.srcElement;
+  if(!target) return;
+  switch(key) {
+    case 33:
+      target.value = px(target.value) + 20;
+      movesize();
+      return false;
+    case 34:
+      target.value = px(target.value) - 20;
+      movesize();
+      return false;
+    break;
+    case 38:
+      target.value = px(target.value) + 5;
+      movesize();
+      return false;
+    case 40:
+      target.value = px(target.value) - 5;
+      movesize();
+      return false;
+    case 13:
+      movesize();
+      return false;
+    break;
+  }
+}
+
+function movesize() {
+  var img = document.getElementById('img');
+  var left = document.getElementById('left'); var top = document.getElementById('top'); var width = document.getElementById('width'); var height = document.getElementById('height');
+  left.value = px(left.value); top.value = px(top.value); width.value = px(width.value); height.value = px(height.value);
+  img.style.left = left.value + 'px'; img.style.top = top.value + 'px'; img.style.width = width.value + 'px'; img.style.height = height.value + 'px';
+
+  var info = document.getElementById('imginfo');
+  info.innerHTML = img.naturalWidth + '×' + img.naturalHeight// + '→' + width.value + '×' + height.value;
+  var ratio = (width.value/img.naturalWidth) / (height.value/img.naturalHeight)
+  if(ratio < 1) {
+    info.innerHTML += ' <small>[1:' + (Math.floor((1/ratio)*100)/100) + ']</small>';
+  } else {
+    info.innerHTML += ' <small>[' + (Math.floor(ratio*100)/100) + ':1]</small>';
+  }
+}
+
+function load(values) {
+  var img = document.getElementById('img');
+  var url = document.getElementById('url');
+  if(values) {
+    var left = document.getElementById('left'); var top = document.getElementById('top'); var width = document.getElementById('width'); var height = document.getElementById('height');
+    left.value = ''; top.value = ''; width.value = ''; height.value = '';
+  }
+  img.src = url.value;
+}
+
+function loaded(img,success) {
+  var url = document.getElementById('url');
+  var info = document.getElementById('imginfo');
+  var left = document.getElementById('left'); var top = document.getElementById('top'); var width = document.getElementById('width'); var height = document.getElementById('height');
+
+  if(success) {
+    url.value = img.src;
+    info.innerHTML = img.naturalWidth + '×' + img.naturalHeight;
+    if(left.value == '' && top.value == '' && width.value == '' && height.value == '') {
+      img.style.left = '0px'; img.style.top = '0px'; img.style.width = img.naturalWidth + 'px'; img.style.height = img.naturalHeight + 'px';
+      left.value = px(img.style.left); top.value = px(img.style.top); width.value = img.naturalWidth; height.value = img.naturalHeight;
+    } else {
+      movesize();
+    }
+  } else {
+    info.innerHTML = 'nope';
+  }
+}
+
+function px(num) {
+  num = parseInt(num.replace(/px$/,''),10);
+  return isNaN(num) ? 0 : num;
+}
+
+function pal() {
+  var ps = document.getElementById('pal');
+  var txt = '';
+  for(var i=1;i<11;i++) {
+    var num = (i < 10) ? i : 0
+    txt += String.fromCharCode(65296 + num) + palette[num];
+    document.getElementById('b' + num).value = String.fromCharCode(48 + num) + palette[num]
+  }
+  ps.innerHTML = txt;
+}
+
+function newpal() {
+  var newp = prompt('Change the palette?\nCurrently (0 to 9): ' + palette.split('').join(',') + '\nThe default blox are good for 4chan.\n\nNOTE: Multibyte UTF16 will screw shit up.',palette);
+  if(!newp || newp == '') return
+  newp += '▒▒▒▒▒▒▒▒▒▒';
+  palette = newp.substr(0,10);
+  pal();
+}
+</script>
+</head>
+<body>
+
+<div><span id="pal"><!--⒈█⒉▀⒊▄⒋▌⒌▐⒍░⒎▒--></span> &bull; <span id="byte">-</span>
+</div>
+
+<div id="wrapper">
+<img id="img" style="left:-0px;top:-0px;" src="" onerror="loaded(this,false)" onload="loaded(this,true)">
+<textarea id="box" onkeyup="byte()" onmouseup="byte()" onkeydown="keyDown(event)">
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░</textarea>
+</div>
+<span title="fill one character or selection">[Insert/Fill]
+<input type="button" id="b1" value="█ 1" onclick="fill(1)"/>
+<input type="button" id="b2" value="▀ 2" onclick="fill(2)"/>
+<input type="button" id="b3" value="▄ 3" onclick="fill(3)"/>
+<input type="button" id="b4" value="▌ 4" onclick="fill(4)"/>
+<input type="button" id="b5" value="▐ 5" onclick="fill(5)"/>
+<input type="button" id="b6" value="░ 6" onclick="fill(6)"/>
+<input type="button" id="b7" value="▒ 7" onclick="fill(7)"/>
+<input type="button" id="b8" value="▒ 8" onclick="fill(8)"/>
+<input type="button" id="b9" value="▒ 9" onclick="fill(9)"/>
+<input type="button" id="b0" value="█ 0" onclick="fill(0)"/>
+<input type="button" value="change" onclick="newpal()" title="edit the palette"/>
+<input type="checkbox" checked="checked" id="hotkeys"/><label for="hotkeys">Hotkeys</label>
+<input type="checkbox" checked="checked" id="cursor"/><label for="cursor">Move cursor</label>
+</span><br/>
+<span title="replace globally or selection">[Replace]
+<input type="button" value="▒→░" onclick="replace('ml')"/>
+<input type="button" value="░→▒" onclick="replace('lm')"/>
+<input type="button" value="^▒→░" onclick="replace('^ml')"/>
+<input type="button" value="▒$→░" onclick="replace('$ml')"/>
+<input type="button" value="░$→_" onclick="replace('l_')"/>
+</span><br/>
+[Misc]
+<input type="button" value="↔" onclick="fliph()" title="flip horizontal"/>
+<input type="button" value="↕" onclick="flipv()" title="flip verical"/>
+<input type="button" value="⟳▭" onclick="flipr()" title="rotate (preserve drawing)"/>
+<input type="button" value="⟳□" onclick="fliprsq()" title="rotate (preserve aspect)"/>
+<input type="button" value="◘" onclick="flipc()" title="invert color"/>
+<input type="button" value="auto▒░" onclick="maketext()" title="generate enough text for the image"/>
+
+<br/><br/>
+<span title="use up/down arrows or pgup/pgdon to increment/decrement field">
+origin: <input id="left" type="text" size="3" maxlength="4" onchange="movesize()" onkeydown="inc(event)"/>,<!--
+--><input id="top" type="text" size="3" maxlength="4" onchange="movesize()" onkeydown="inc(event)"/>
+&bull; size: <input id="width" type="text" size="3" maxlength="4" onchange="movesize()" onkeydown="inc(event)""/>×<!--
+--><input id="height" type="text" size="3" maxlength="4" onchange="movesize()" onkeydown="inc(event)""/>
+</span>
+<br/>
+url: <input id="url" type="text" size="50" maxlength="999" onchange="load(false)"/> <input type="button" value="fresh load" onclick="load(true)"/> <span id="imginfo">-</span>
+<br/>
+
+<script type="text/javascript">load(false);pal();</script></body></html>
+<!-- a1b37a531ca2bba3339d454430563750
+0.1	http://pastebin.com/raw.php?i=f64yYuQr
+0.2a	http://pastebin.com/raw.php?i=J4qn4rsK
+0.2d	http://pastebin.com/raw.php?i=YmKnCCL4
+0.2e	http://pastebin.com/raw.php?i=7EzXq8yE
+0.3a	http://pastebin.com/raw.php?i=hvdci7nX
+
+Keys:
+* With "Hotkeys" selected and main box focused: [1]-[7] draws one block (inserts one at a time, or over whole selection).
+* With image origin/size boxes focused: [up]/[down] changes value by ±5, [pgup]/[pgdn] by ±20, [enter] applies typed value.
+* Normal undo functions seem to work fine for the main text area, but copy/paste your progress to a .txt file regularly.
+
+Done:
+* Spam warning
+* Don't overwrite newlines with insert/fill
+* Magic box filler (Generate blank grid to fit image)
+* Checkbox to keep cursor still
+* Custom palette handy for mapping to numeric keypad
+* Two types of rotation
+
+Todo:
+* Set up arrows to move origin or size corners rather than just fields?
+
+No restriction. WTFPL.
+-->
