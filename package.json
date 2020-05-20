@@ -2,10 +2,10 @@
   "name": "dots-converter",
   "version": "1.0.0",
   "scripts": {
-    "start": "http-server -o retro.html"
+    "start": "browser-sync --index retro.html --watch"
   },
   "devDependencies": {
-    "http-server": "^0.12.3"
+    "browser-sync": "^2.26.7"
   },
   "author": "Originally LoveEevee but modified by rpbeukes",
   "license": "MIT",
