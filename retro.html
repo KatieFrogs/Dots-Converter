@@ -51,11 +51,14 @@
 			<option value="2">Half blocks</option>
 		</select><div
 		id="flcus">Choose file<form id="filesf"><input type="file" id="files"></form></div><div
-		id="swdots1" style="display:none"><input
-			type="button" onclick="dots.file()" value="Image to Dots" id="ntbtna"><input
-			type="button" onclick="dots.cancel()" value="Cancel" id="cnclb1" style="display:none"><input
-			type="button" onclick="dots.toimg()" value="Dots to Image"><input
-			type="button" value="Open doo-del" onclick="location='dots-draw.html'">
+		id="swdots1" style="display:none">
+		
+		<input type="button" value="Image to 6-Dots" id="six-dot-btn" onclick="dots.imageTo6Dots()"/>
+		<input type="button" onclick="dots.file()" value="Image to Dots" id="ntbtna"/>
+		<input type="button" onclick="dots.cancel()" value="Cancel" id="cnclb1" style="display:none"/>
+		<input type="button" onclick="dots.toimg()" value="Dots to Image"/>
+		<input type="button" value="Open doo-del" onclick="location='dots-draw.html'"/>
+
 		</div><div
 		id="swblocks1" style="display:none"><input
 			type="button" onclick="dots.file()" value="Image to Blocks" id="ntbtnb"><input
@@ -1216,5 +1219,6 @@
 				}
 			,0)
 		</script>
+		<script type="text/javascript" src="retro.js"></script>
 	</body>
 </html>
