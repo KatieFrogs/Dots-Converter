@@ -6,16 +6,18 @@
   dots.imageTo6Dots = function () {
     if (dots.file) {
       dots.file();
-      // hack a wait for the dot.file() to finish before convert to 6-dot will run
+      // hack - wait 1 sec for the dot.file() to finish, then execute the actual imageTo6Dots code
       setTimeout(() => {
         var brailleText = di("txt").value;
-        var newImage = "";
+        var newImageWith6Dots = "";
         for (i = 0; i < brailleText.length; i++) {
           // clear dot 7 and 8, only want dots 1 to 6
-          newImage += String.fromCharCode(brailleText[i].charCodeAt() & 0xff3f);
+          newImageWith6Dots += String.fromCharCode(
+            brailleText[i].charCodeAt() & 0xff3f
+          );
         }
         // console.log(newImage);
-        di("txt").value = newImage;
+        di("txt").value = newImageWith6Dots;
       }, 1000);
     } else {
       console.error("Failed - Could not find dots.file()");
