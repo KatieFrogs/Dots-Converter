@@ -19,12 +19,13 @@ function hex2bin(hexString) {
 function generate() {
   let brailleLookup = [];
   for (let i = 0x2800; i <= 0x283f; i++) {
+    let leastSignificantByte = i & 0x00ff; // eg: i=0x283f will become 0x3f.
     brailleLookup.push({
       unicodeDecimal: i,
       unicodeCharNumber: "U+" + i.toString(16).toUpperCase(),
       brailleForm: String.fromCharCode(i),
-      dots: toDotsNotation(i & 0x00ff), // eg: i=0x283f, then 0x3f will be passed to function
-      dotsBinary: hex2bin((i & 0x00ff).toString(16)),
+      dots: toDotsNotation(leastSignificantByte),
+      dotsBinary: hex2bin(leastSignificantByte.toString(16)),
       meaning: "ToDo",
     });
   }
