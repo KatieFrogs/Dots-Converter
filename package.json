@@ -2,7 +2,8 @@
   "name": "dots-converter",
   "version": "1.0.0",
   "scripts": {
-    "start": "browser-sync --index retro.html --watch"
+    "start": "browser-sync --index retro.html --watch",
+    "generateBrailleTable": "node ./src/generateBrailleTranslateTable.js"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7"
