@@ -1,10 +1,10 @@
-import { imageTo6Dots } from "./imageTo6Dots.js";
+import { onClickImageTo6Dots } from "./onClickImageTo6Dots.js";
 
 (function extendDotsObject() {
   console.log("extendDotsObject");
 
   dots = dots || {};
-  dots.imageTo6Dots = imageTo6Dots;
+  dots.onClickImageTo6Dots = onClickImageTo6Dots;
 })();
 
 (function initInputValues() {
