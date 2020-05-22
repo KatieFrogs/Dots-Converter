@@ -5,7 +5,7 @@ export const brailleTable = [
     brailleForm: "⠀",
     dots: "",
     dotsBinary: "000000",
-    meaning: "ToDo",
+    meaning: "(space)",
   },
   {
     unicodeDecimal: 10241,
@@ -13,7 +13,7 @@ export const brailleTable = [
     brailleForm: "⠁",
     dots: 1,
     dotsBinary: "000001",
-    meaning: "ToDo",
+    meaning: "a",
   },
   {
     unicodeDecimal: 10242,
@@ -21,7 +21,7 @@ export const brailleTable = [
     brailleForm: "⠂",
     dots: 2,
     dotsBinary: "000010",
-    meaning: "ToDo",
+    meaning: ",",
   },
   {
     unicodeDecimal: 10243,
@@ -29,7 +29,7 @@ export const brailleTable = [
     brailleForm: "⠃",
     dots: 12,
     dotsBinary: "000011",
-    meaning: "ToDo",
+    meaning: "b",
   },
   {
     unicodeDecimal: 10244,
@@ -37,7 +37,7 @@ export const brailleTable = [
     brailleForm: "⠄",
     dots: 3,
     dotsBinary: "000100",
-    meaning: "ToDo",
+    meaning: "'",
   },
   {
     unicodeDecimal: 10245,
@@ -45,7 +45,7 @@ export const brailleTable = [
     brailleForm: "⠅",
     dots: 13,
     dotsBinary: "000101",
-    meaning: "ToDo",
+    meaning: "k",
   },
   {
     unicodeDecimal: 10246,
@@ -53,7 +53,7 @@ export const brailleTable = [
     brailleForm: "⠆",
     dots: 23,
     dotsBinary: "000110",
-    meaning: "ToDo",
+    meaning: ";",
   },
   {
     unicodeDecimal: 10247,
@@ -61,7 +61,7 @@ export const brailleTable = [
     brailleForm: "⠇",
     dots: 123,
     dotsBinary: "000111",
-    meaning: "ToDo",
+    meaning: "l",
   },
   {
     unicodeDecimal: 10248,
@@ -69,7 +69,7 @@ export const brailleTable = [
     brailleForm: "⠈",
     dots: 4,
     dotsBinary: "001000",
-    meaning: "ToDo",
+    meaning: "@(at)",
   },
   {
     unicodeDecimal: 10249,
@@ -77,7 +77,7 @@ export const brailleTable = [
     brailleForm: "⠉",
     dots: 14,
     dotsBinary: "001001",
-    meaning: "ToDo",
+    meaning: "c",
   },
   {
     unicodeDecimal: 10250,
@@ -85,7 +85,7 @@ export const brailleTable = [
     brailleForm: "⠊",
     dots: 24,
     dotsBinary: "001010",
-    meaning: "ToDo",
+    meaning: "i",
   },
   {
     unicodeDecimal: 10251,
@@ -93,7 +93,7 @@ export const brailleTable = [
     brailleForm: "⠋",
     dots: 124,
     dotsBinary: "001011",
-    meaning: "ToDo",
+    meaning: "f",
   },
   {
     unicodeDecimal: 10252,
@@ -101,7 +101,7 @@ export const brailleTable = [
     brailleForm: "⠌",
     dots: 34,
     dotsBinary: "001100",
-    meaning: "ToDo",
+    meaning: "/",
   },
   {
     unicodeDecimal: 10253,
@@ -109,7 +109,7 @@ export const brailleTable = [
     brailleForm: "⠍",
     dots: 134,
     dotsBinary: "001101",
-    meaning: "ToDo",
+    meaning: "m",
   },
   {
     unicodeDecimal: 10254,
@@ -117,7 +117,7 @@ export const brailleTable = [
     brailleForm: "⠎",
     dots: 234,
     dotsBinary: "001110",
-    meaning: "ToDo",
+    meaning: "s",
   },
   {
     unicodeDecimal: 10255,
@@ -125,7 +125,7 @@ export const brailleTable = [
     brailleForm: "⠏",
     dots: 1234,
     dotsBinary: "001111",
-    meaning: "ToDo",
+    meaning: "p",
   },
   {
     unicodeDecimal: 10256,
@@ -133,7 +133,7 @@ export const brailleTable = [
     brailleForm: "⠐",
     dots: 5,
     dotsBinary: "010000",
-    meaning: "ToDo",
+    meaning: "dot-5",
   },
   {
     unicodeDecimal: 10257,
@@ -141,7 +141,7 @@ export const brailleTable = [
     brailleForm: "⠑",
     dots: 15,
     dotsBinary: "010001",
-    meaning: "ToDo",
+    meaning: "e",
   },
   {
     unicodeDecimal: 10258,
@@ -149,7 +149,7 @@ export const brailleTable = [
     brailleForm: "⠒",
     dots: 25,
     dotsBinary: "010010",
-    meaning: "ToDo",
+    meaning: ":",
   },
   {
     unicodeDecimal: 10259,
@@ -157,7 +157,7 @@ export const brailleTable = [
     brailleForm: "⠓",
     dots: 125,
     dotsBinary: "010011",
-    meaning: "ToDo",
+    meaning: "h",
   },
   {
     unicodeDecimal: 10260,
@@ -165,7 +165,7 @@ export const brailleTable = [
     brailleForm: "⠔",
     dots: 35,
     dotsBinary: "010100",
-    meaning: "ToDo",
+    meaning: "'in'",
   },
   {
     unicodeDecimal: 10261,
@@ -173,7 +173,7 @@ export const brailleTable = [
     brailleForm: "⠕",
     dots: 135,
     dotsBinary: "010101",
-    meaning: "ToDo",
+    meaning: "o",
   },
   {
     unicodeDecimal: 10262,
@@ -181,7 +181,7 @@ export const brailleTable = [
     brailleForm: "⠖",
     dots: 235,
     dotsBinary: "010110",
-    meaning: "ToDo",
+    meaning: "!",
   },
   {
     unicodeDecimal: 10263,
@@ -189,7 +189,7 @@ export const brailleTable = [
     brailleForm: "⠗",
     dots: 1235,
     dotsBinary: "010111",
-    meaning: "ToDo",
+    meaning: "r",
   },
   {
     unicodeDecimal: 10264,
@@ -197,7 +197,7 @@ export const brailleTable = [
     brailleForm: "⠘",
     dots: 45,
     dotsBinary: "011000",
-    meaning: "ToDo",
+    meaning: "dot-45",
   },
   {
     unicodeDecimal: 10265,
@@ -205,7 +205,7 @@ export const brailleTable = [
     brailleForm: "⠙",
     dots: 145,
     dotsBinary: "011001",
-    meaning: "ToDo",
+    meaning: "d",
   },
   {
     unicodeDecimal: 10266,
@@ -213,7 +213,7 @@ export const brailleTable = [
     brailleForm: "⠚",
     dots: 245,
     dotsBinary: "011010",
-    meaning: "ToDo",
+    meaning: "j",
   },
   {
     unicodeDecimal: 10267,
@@ -221,7 +221,7 @@ export const brailleTable = [
     brailleForm: "⠛",
     dots: 1245,
     dotsBinary: "011011",
-    meaning: "ToDo",
+    meaning: "g",
   },
   {
     unicodeDecimal: 10268,
@@ -229,7 +229,7 @@ export const brailleTable = [
     brailleForm: "⠜",
     dots: 345,
     dotsBinary: "011100",
-    meaning: "ToDo",
+    meaning: "'ar'",
   },
   {
     unicodeDecimal: 10269,
@@ -237,7 +237,7 @@ export const brailleTable = [
     brailleForm: "⠝",
     dots: 1345,
     dotsBinary: "011101",
-    meaning: "ToDo",
+    meaning: "n",
   },
   {
     unicodeDecimal: 10270,
@@ -245,7 +245,7 @@ export const brailleTable = [
     brailleForm: "⠞",
     dots: 2345,
     dotsBinary: "011110",
-    meaning: "ToDo",
+    meaning: "t",
   },
   {
     unicodeDecimal: 10271,
@@ -253,7 +253,7 @@ export const brailleTable = [
     brailleForm: "⠟",
     dots: 12345,
     dotsBinary: "011111",
-    meaning: "ToDo",
+    meaning: "q",
   },
   {
     unicodeDecimal: 10272,
@@ -261,7 +261,7 @@ export const brailleTable = [
     brailleForm: "⠠",
     dots: 6,
     dotsBinary: "100000",
-    meaning: "ToDo",
+    meaning: "dot-6(capital letter)",
   },
   {
     unicodeDecimal: 10273,
@@ -269,7 +269,7 @@ export const brailleTable = [
     brailleForm: "⠡",
     dots: 16,
     dotsBinary: "100001",
-    meaning: "ToDo",
+    meaning: "'ch",
   },
   {
     unicodeDecimal: 10274,
@@ -277,7 +277,7 @@ export const brailleTable = [
     brailleForm: "⠢",
     dots: 26,
     dotsBinary: "100010",
-    meaning: "ToDo",
+    meaning: "'en'",
   },
   {
     unicodeDecimal: 10275,
@@ -285,7 +285,7 @@ export const brailleTable = [
     brailleForm: "⠣",
     dots: 126,
     dotsBinary: "100011",
-    meaning: "ToDo",
+    meaning: "gh",
   },
   {
     unicodeDecimal: 10276,
@@ -293,7 +293,7 @@ export const brailleTable = [
     brailleForm: "⠤",
     dots: 36,
     dotsBinary: "100100",
-    meaning: "ToDo",
+    meaning: "-(hyphen)",
   },
   {
     unicodeDecimal: 10277,
@@ -301,7 +301,7 @@ export const brailleTable = [
     brailleForm: "⠥",
     dots: 136,
     dotsBinary: "100101",
-    meaning: "ToDo",
+    meaning: "u",
   },
   {
     unicodeDecimal: 10278,
@@ -309,7 +309,7 @@ export const brailleTable = [
     brailleForm: "⠦",
     dots: 236,
     dotsBinary: "100110",
-    meaning: "ToDo",
+    meaning: "“(open-quote)",
   },
   {
     unicodeDecimal: 10279,
@@ -317,7 +317,7 @@ export const brailleTable = [
     brailleForm: "⠧",
     dots: 1236,
     dotsBinary: "100111",
-    meaning: "ToDo",
+    meaning: "v",
   },
   {
     unicodeDecimal: 10280,
@@ -325,7 +325,7 @@ export const brailleTable = [
     brailleForm: "⠨",
     dots: 46,
     dotsBinary: "101000",
-    meaning: "ToDo",
+    meaning: "dot-46",
   },
   {
     unicodeDecimal: 10281,
@@ -333,7 +333,7 @@ export const brailleTable = [
     brailleForm: "⠩",
     dots: 146,
     dotsBinary: "101001",
-    meaning: "ToDo",
+    meaning: "'sh'",
   },
   {
     unicodeDecimal: 10282,
@@ -341,7 +341,7 @@ export const brailleTable = [
     brailleForm: "⠪",
     dots: 246,
     dotsBinary: "101010",
-    meaning: "ToDo",
+    meaning: "'ow'",
   },
   {
     unicodeDecimal: 10283,
@@ -349,7 +349,7 @@ export const brailleTable = [
     brailleForm: "⠫",
     dots: 1246,
     dotsBinary: "101011",
-    meaning: "ToDo",
+    meaning: "'ed'",
   },
   {
     unicodeDecimal: 10284,
@@ -357,7 +357,7 @@ export const brailleTable = [
     brailleForm: "⠬",
     dots: 346,
     dotsBinary: "101100",
-    meaning: "ToDo",
+    meaning: "'ing'",
   },
   {
     unicodeDecimal: 10285,
@@ -365,7 +365,7 @@ export const brailleTable = [
     brailleForm: "⠭",
     dots: 1346,
     dotsBinary: "101101",
-    meaning: "ToDo",
+    meaning: "x",
   },
   {
     unicodeDecimal: 10286,
@@ -373,7 +373,7 @@ export const brailleTable = [
     brailleForm: "⠮",
     dots: 2346,
     dotsBinary: "101110",
-    meaning: "ToDo",
+    meaning: "'the'",
   },
   {
     unicodeDecimal: 10287,
@@ -381,7 +381,7 @@ export const brailleTable = [
     brailleForm: "⠯",
     dots: 12346,
     dotsBinary: "101111",
-    meaning: "ToDo",
+    meaning: "'and'",
   },
   {
     unicodeDecimal: 10288,
@@ -389,7 +389,7 @@ export const brailleTable = [
     brailleForm: "⠰",
     dots: 56,
     dotsBinary: "110000",
-    meaning: "ToDo",
+    meaning: "dot-56",
   },
   {
     unicodeDecimal: 10289,
@@ -397,7 +397,7 @@ export const brailleTable = [
     brailleForm: "⠱",
     dots: 156,
     dotsBinary: "110001",
-    meaning: "ToDo",
+    meaning: "'wh'",
   },
   {
     unicodeDecimal: 10290,
@@ -405,7 +405,7 @@ export const brailleTable = [
     brailleForm: "⠲",
     dots: 256,
     dotsBinary: "110010",
-    meaning: "ToDo",
+    meaning: ".",
   },
   {
     unicodeDecimal: 10291,
@@ -413,7 +413,7 @@ export const brailleTable = [
     brailleForm: "⠳",
     dots: 1256,
     dotsBinary: "110011",
-    meaning: "ToDo",
+    meaning: "ou",
   },
   {
     unicodeDecimal: 10292,
@@ -421,7 +421,7 @@ export const brailleTable = [
     brailleForm: "⠴",
     dots: 356,
     dotsBinary: "110100",
-    meaning: "ToDo",
+    meaning: "”(close-quote)",
   },
   {
     unicodeDecimal: 10293,
@@ -429,7 +429,7 @@ export const brailleTable = [
     brailleForm: "⠵",
     dots: 1356,
     dotsBinary: "110101",
-    meaning: "ToDo",
+    meaning: "z",
   },
   {
     unicodeDecimal: 10294,
@@ -437,7 +437,7 @@ export const brailleTable = [
     brailleForm: "⠶",
     dots: 2356,
     dotsBinary: "110110",
-    meaning: "ToDo",
+    meaning: "'gg'",
   },
   {
     unicodeDecimal: 10295,
@@ -445,7 +445,7 @@ export const brailleTable = [
     brailleForm: "⠷",
     dots: 12356,
     dotsBinary: "110111",
-    meaning: "ToDo",
+    meaning: "'of'",
   },
   {
     unicodeDecimal: 10296,
@@ -453,7 +453,7 @@ export const brailleTable = [
     brailleForm: "⠸",
     dots: 456,
     dotsBinary: "111000",
-    meaning: "ToDo",
+    meaning: "dot-456",
   },
   {
     unicodeDecimal: 10297,
@@ -461,7 +461,7 @@ export const brailleTable = [
     brailleForm: "⠹",
     dots: 1456,
     dotsBinary: "111001",
-    meaning: "ToDo",
+    meaning: "'th'",
   },
   {
     unicodeDecimal: 10298,
@@ -469,7 +469,7 @@ export const brailleTable = [
     brailleForm: "⠺",
     dots: 2456,
     dotsBinary: "111010",
-    meaning: "ToDo",
+    meaning: "w",
   },
   {
     unicodeDecimal: 10299,
@@ -477,7 +477,7 @@ export const brailleTable = [
     brailleForm: "⠻",
     dots: 12456,
     dotsBinary: "111011",
-    meaning: "ToDo",
+    meaning: "'er'",
   },
   {
     unicodeDecimal: 10300,
@@ -485,7 +485,7 @@ export const brailleTable = [
     brailleForm: "⠼",
     dots: 3456,
     dotsBinary: "111100",
-    meaning: "ToDo",
+    meaning: "#(number)",
   },
   {
     unicodeDecimal: 10301,
@@ -493,7 +493,7 @@ export const brailleTable = [
     brailleForm: "⠽",
     dots: 13456,
     dotsBinary: "111101",
-    meaning: "ToDo",
+    meaning: "y",
   },
   {
     unicodeDecimal: 10302,
@@ -501,7 +501,7 @@ export const brailleTable = [
     brailleForm: "⠾",
     dots: 23456,
     dotsBinary: "111110",
-    meaning: "ToDo",
+    meaning: "'with'",
   },
   {
     unicodeDecimal: 10303,
@@ -509,6 +509,6 @@ export const brailleTable = [
     brailleForm: "⠿",
     dots: 123456,
     dotsBinary: "111111",
-    meaning: "ToDo",
+    meaning: "'for'",
   },
 ];
