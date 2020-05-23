@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "scripts": {
     "start": "browser-sync --index retro.html --watch",
+    "test": "mocha --require esm './tests/**/*test.js'",
     "generateBrailleTable": "node ./src/generateBrailleTranslateTable.js"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7"
+    "browser-sync": "^2.26.7",
+    "chai": "^4.2.0",
+    "esm": "^3.2.25",
+    "mocha": "^7.2.0"
   },
   "author": "Originally LoveEevee but modified by rpbeukes",
   "license": "MIT",
