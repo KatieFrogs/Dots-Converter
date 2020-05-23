@@ -1,18 +1,27 @@
 import { onClickImageTo6Dots } from "./onClickImageTo6Dots.js";
+import { createBrailleInstructions } from "./createBrailleInstructions.js";
 
 (function extendDotsObject() {
   console.log("extendDotsObject");
 
   dots = dots || {};
+
   dots.onClickImageTo6Dots = onClickImageTo6Dots;
+
+  dots.onClickCreateBrailleInstructions = () => {
+    console.log("click - onClickCreateBrailleInstructions");
+    document.getElementById(
+      "txt-braille-instructions"
+    ).value = createBrailleInstructions(document.getElementById("txt").value);
+  };
 })();
 
 (function initInputValues() {
   console.log("initInputValues");
   // set Width and Height
-  di("widt").value = 80;
-  di("heig").value = 80;
+  document.getElementById("widt").value = 80;
+  document.getElementById("heig").value = 80;
 
   // set Brightness slider
-  di("fuzzw").value = 30;
+  document.getElementById("fuzzw").value = 30;
 })();
