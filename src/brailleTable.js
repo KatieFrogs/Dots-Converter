@@ -69,7 +69,7 @@ export const brailleTable = [
     brailleForm: "⠈",
     dots: 4,
     dotsBinary: "001000",
-    meaning: "@(at)",
+    meaning: "dot-4",
   },
   {
     unicodeDecimal: 10249,
@@ -101,7 +101,7 @@ export const brailleTable = [
     brailleForm: "⠌",
     dots: 34,
     dotsBinary: "001100",
-    meaning: "/",
+    meaning: "'st'",
   },
   {
     unicodeDecimal: 10253,
@@ -309,7 +309,7 @@ export const brailleTable = [
     brailleForm: "⠦",
     dots: 236,
     dotsBinary: "100110",
-    meaning: "“(open-quote)",
+    meaning: "?",
   },
   {
     unicodeDecimal: 10279,
@@ -413,7 +413,7 @@ export const brailleTable = [
     brailleForm: "⠳",
     dots: 1256,
     dotsBinary: "110011",
-    meaning: "ou",
+    meaning: "'ou'",
   },
   {
     unicodeDecimal: 10292,
@@ -421,7 +421,7 @@ export const brailleTable = [
     brailleForm: "⠴",
     dots: 356,
     dotsBinary: "110100",
-    meaning: "”(close-quote)",
+    meaning: "'was'",
   },
   {
     unicodeDecimal: 10293,
@@ -437,7 +437,7 @@ export const brailleTable = [
     brailleForm: "⠶",
     dots: 2356,
     dotsBinary: "110110",
-    meaning: "'gg'",
+    meaning: "'were'",
   },
   {
     unicodeDecimal: 10295,
@@ -485,7 +485,7 @@ export const brailleTable = [
     brailleForm: "⠼",
     dots: 3456,
     dotsBinary: "111100",
-    meaning: "#(number)",
+    meaning: "(number sign)",
   },
   {
     unicodeDecimal: 10301,
@@ -509,6 +509,6 @@ export const brailleTable = [
     brailleForm: "⠿",
     dots: 123456,
     dotsBinary: "111111",
-    meaning: "'for'",
+    meaning: "(full cell)",
   },
 ];
