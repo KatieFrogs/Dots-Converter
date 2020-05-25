@@ -19,8 +19,8 @@ import { createBrailleInstructions } from "./createBrailleInstructions.js";
 (function initInputValues() {
   console.log("initInputValues");
   // set Width and Height
-  document.getElementById("widt").value = 80;
-  document.getElementById("heig").value = 80;
+  document.getElementById("widt").value = 40;
+  document.getElementById("heig").value = 50;
 
   // set Brightness slider
   document.getElementById("fuzzw").value = 30;
