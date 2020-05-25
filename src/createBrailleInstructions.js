@@ -5,56 +5,40 @@ export const createBrailleInstructions = (braillePatternString) => {
     console.log("createBrailleInstructions: ", braillePatternString);
     const lines = braillePatternString.split("\n");
 
-    let instructions = "";
+    let rows = [];
     lines.forEach((line, index) => {
+      line = "B" + line + "E"; // append 2 known characters to the line =>  B=Begin; E=End
+
+      let rowInstructions = [];
+      let repeatRecorded = [];
+
       // process line
-      instructions += `Row ${index + 1}:`;
+      for (let chrIndex = 1; chrIndex < line.length; chrIndex++) {
+        const brailleChar = line[chrIndex];
+        let previousBrailleChar = line[chrIndex - 1];
 
-      if (line.length > 1) {
-        let repeatCharCount = 1;
-
-        for (let chrIndex = 1; chrIndex < line.length; chrIndex++) {
-          const brailleChar = line[chrIndex];
-          let previousBrailleChar = line[chrIndex - 1];
-          const mappedPreviousBraille = brailleTable.find(
-            (brailleMap) => brailleMap.brailleForm === previousBrailleChar
-          );
-          instructions += ` ${mappedPreviousBraille.meaning},`;
-
-          if (brailleChar != previousBrailleChar) {
-            const mappedBraille = brailleTable.find(
-              (brailleMap) => brailleMap.brailleForm === brailleChar
-            );
-
-            if (repeatCharCount > 1) {
-              instructions += `(x${repeatCharCount}),`;
-              repeatCharCount = 0;
-            } else {
-              instructions += `${mappedPreviousBraille.meaning}`;
-            }
-          } else {
-            repeatCharCount += 1;
-          }
-          previousBrailleChar = brailleChar;
-        }
-
-        if (repeatCharCount > 1) {
-          // remove last comma
-          instructions = instructions.substr(0, instructions.length - 1);
-          //print repeats
-          instructions += `(x${repeatCharCount}),`;
-        }
-      } else {
-        // one char in line
+        // find braille character meaning
         const mappedBraille = brailleTable.find(
-          (brailleMap) => brailleMap.brailleForm === line[0]
+          (brailleMap) => brailleMap.brailleForm === brailleChar
         );
-        instructions += ` ${mappedBraille.meaning},`;
+
+        if (brailleChar != previousBrailleChar) {
+          if (mappedBraille) {
+            rowInstructions.push(mappedBraille.meaning);
+            repeatRecorded = [];
+            repeatRecorded.push(mappedBraille.meaning);
+          }
+        } else {
+          repeatRecorded.push(mappedBraille.meaning);
+          // replace last array element as a repeat was detected
+          rowInstructions[
+            rowInstructions.length - 1
+          ] = `${mappedBraille.meaning}[${repeatRecorded.length} times]`;
+        }
       }
-      // remove last comma
-      instructions = instructions.substr(0, instructions.length - 1);
-      instructions += "\n";
+
+      rows.push(`Row ${index + 1}: ${rowInstructions.join(", ")}\n`);
     });
-    return instructions;
+    return rows.join("");
   }
 };
