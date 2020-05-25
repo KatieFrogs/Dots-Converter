@@ -1,12 +1,19 @@
 import { brailleTable } from "./brailleTable.js";
 
 export const createBrailleInstructions = (braillePatternString) => {
+  let maxLine = 0;
+  let maxRow = 0;
+  let rows = [];
+
   if (braillePatternString) {
     console.log("createBrailleInstructions:\n", braillePatternString);
     const lines = braillePatternString.split("\n");
-
-    let rows = [];
     lines.forEach((line, index) => {
+      if (line.length > maxLine) {
+        maxLine = line.length;
+        maxRow = index + 1;
+      }
+
       line = "B" + line + "E"; // append 2 known characters to the line =>  B=Begin; E=End
 
       let rowInstructions = [];
@@ -43,7 +50,11 @@ export const createBrailleInstructions = (braillePatternString) => {
         )}\n`
       );
     });
-
-    return rows.join("");
   }
+
+  return {
+    instructions: rows,
+    maxLineLength: maxLine,
+    maxRow: maxRow,
+  };
 };

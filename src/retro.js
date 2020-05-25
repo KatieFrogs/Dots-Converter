@@ -10,9 +10,17 @@ import { createBrailleInstructions } from "./createBrailleInstructions.js";
 
   dots.onClickCreateBrailleInstructions = () => {
     console.log("click - onClickCreateBrailleInstructions");
+    const brailleInstructionObj = createBrailleInstructions(
+      document.getElementById("txt").value
+    );
+
     document.getElementById(
       "txt-braille-instructions"
-    ).value = createBrailleInstructions(document.getElementById("txt").value);
+    ).value = brailleInstructionObj.instructions.join("");
+
+    document.getElementById(
+      "txt-braille-instructions"
+    ).value += `\n\nMax line length: Row ${brailleInstructionObj.maxRow}, ${brailleInstructionObj.maxLineLength} characters.`;
   };
 })();
 
