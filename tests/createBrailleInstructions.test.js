@@ -6,28 +6,28 @@ describe("createBrailleInstructions", function () {
     describe("should handle repeated characters", function () {
       it("when repeats are the first characters in the line", function () {
         const result = createBrailleInstructions("⠁⠁");
-        expect(result).to.equal("Row 1: a[2 times]\n");
+        expect(result).to.equal("Row 01: a[2 times]\n");
       });
 
       it("when repeats are in the last part of line", function () {
         const result = createBrailleInstructions("⠃⠁⠁");
-        expect(result).to.equal("Row 1: b, a[2 times]\n");
+        expect(result).to.equal("Row 01: b, a[2 times]\n");
       });
 
       it("when more than 2 repeats in the middle of sentence", function () {
         const result = createBrailleInstructions("⠃⠁⠁⠁⠁⠁⠁⠃");
-        expect(result).to.equal("Row 1: b, a[6 times], b\n");
+        expect(result).to.equal("Row 01: b, a[6 times], b\n");
       });
 
       it("when repeats are in the middle of line", function () {
         const result = createBrailleInstructions("⠃⠁⠁⠃");
-        expect(result).to.equal("Row 1: b, a[2 times], b\n");
+        expect(result).to.equal("Row 01: b, a[2 times], b\n");
       });
     });
 
     it("should handle only one character in row", function () {
       const result = createBrailleInstructions("⠁");
-      expect(result).to.equal("Row 1: a\n");
+      expect(result).to.equal("Row 01: a\n");
     });
   });
 
@@ -35,7 +35,7 @@ describe("createBrailleInstructions", function () {
     it("should handle rows and repeats", function () {
       const result = createBrailleInstructions("⠃⠁⠁⠁⠁⠁⠁⠃\n⠁⠁\n⠃⠁");
       expect(result).to.equal(
-        "Row 1: b, a[6 times], b\nRow 2: a[2 times]\nRow 3: b, a\n"
+        "Row 01: b, a[6 times], b\nRow 02: a[2 times]\nRow 03: b, a\n"
       );
     });
   });
