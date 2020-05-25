@@ -30,4 +30,13 @@ describe("createBrailleInstructions", function () {
       expect(result).to.equal("Row 1: a\n");
     });
   });
+
+  describe("with multiple rows", function () {
+    it("should handle rows and repeats", function () {
+      const result = createBrailleInstructions("⠃⠁⠁⠁⠁⠁⠁⠃\n⠁⠁\n⠃⠁");
+      expect(result).to.equal(
+        "Row 1: b, a[6 times], b\nRow 2: a[2 times]\nRow 3: b, a\n"
+      );
+    });
+  });
 });
