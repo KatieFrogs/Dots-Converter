@@ -2,7 +2,7 @@ import { brailleTable } from "./brailleTable.js";
 
 export const createBrailleInstructions = (braillePatternString) => {
   if (braillePatternString) {
-    console.log("createBrailleInstructions: ", braillePatternString);
+    console.log("createBrailleInstructions:\n", braillePatternString);
     const lines = braillePatternString.split("\n");
 
     let rows = [];
@@ -37,8 +37,13 @@ export const createBrailleInstructions = (braillePatternString) => {
         }
       }
 
-      rows.push(`Row ${index + 1}: ${rowInstructions.join(", ")}\n`);
+      rows.push(
+        `Row ${(index + 1).toString().padStart(2, "0")}: ${rowInstructions.join(
+          ", "
+        )}\n`
+      );
     });
+
     return rows.join("");
   }
 };
