@@ -12,6 +12,7 @@
       "args": [
         "--require",
         "esm",
+        "--watch",
         "--timeout",
         "999999",
         "--colors",
